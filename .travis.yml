@@ -6,3 +6,10 @@ install:
 
 script:
   - gulp build --release
+
+deploy:
+  provider: s3
+  access_key_id: "AKIAI3FXFNMM35JXIZ6A"
+  secret_access_key: "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"
+  bucket: "S3 Bucket"
+  skip_cleanup: true
