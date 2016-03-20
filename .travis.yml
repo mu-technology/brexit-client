@@ -12,4 +12,5 @@ deploy:
   access_key_id: "AKIAI3FXFNMM35JXIZ6A"
   secret_access_key: "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"
   bucket: "brexit.vote"
+  region: eu-west-1
   skip_cleanup: true
