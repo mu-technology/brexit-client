@@ -1,5 +1,6 @@
-install
+language: node.js
+install:
   - npm install
 
-script
+script:
   - gulp build --release
