@@ -17,7 +17,7 @@ module.exports = (workflow, gulp, $, config) => {
                     transform: () => `<script>System.import('app').then(null, console.error.bind(console));</script>`
                 }))
             )
-            .pipe(gulp.dest(''));
+            .pipe($.if(config.args.release, gulp.dest('./dist/'), gulp.dest('')));
     });
 
     workflow.subtask('bundle:vendors', () => {
