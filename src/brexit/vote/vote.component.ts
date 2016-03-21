@@ -9,12 +9,15 @@ import {submitVote, voteSuccess, authSuccess} from '../shared/brexit.actions';
 @Component({
     selector: 'vote',
     template: `
-    <ul>
-        <li *ngFor="#vote of votes">
-            <button (click)="submitVote(vote)">{{ vote.label }}</button>
-            <p>isSelected: {{ vote.isSelected }}</p>
-        </li>
-    </ul>`,
+    <div class="vote 123">
+        <ul class="options-list">
+            <li class="options-list-item" *ngFor="#vote of votes">
+                <button class="option-button"
+                        [class.selected]="vote.isSelected"
+                        (click)="submitVote(vote)">{{ vote.label }}</button>
+            </li>
+        </ul>
+    </div>`,
     providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
 export class VoteComponent implements OnDestroy {

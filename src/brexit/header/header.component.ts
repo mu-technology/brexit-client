@@ -3,7 +3,7 @@ import {Component} from 'angular2/core';
 @Component({
     selector: 'header',
     template: `
-    <nav>
+    <nav class="brexit-header">
         <h1>Brexit</h1>
     </nav>`
 })

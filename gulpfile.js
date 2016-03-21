@@ -5,5 +5,5 @@ workflow
     .load(gulp)
     .task('clean', 'Clean any build folders', ['clean:dist', 'clean:release'])
     .task('lint', 'Run all linters.', ['tslint'])
-    .task('develop', 'Develop the application', ['clean', 'lint', 'build:index:dev'])
-    .task('release', 'Release the application', ['clean', 'lint', 'build:js:release', 'build:index:release', 'package']);
+    .task('develop', 'Develop the application', ['clean', 'lint', 'build:css', 'build:index:dev'])
+    .task('release', 'Release the application', ['clean', 'lint', 'build:css', 'build:js:release', 'build:index:release', 'package']);
