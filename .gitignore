@@ -3,5 +3,6 @@ node_modules/
 jspm_packages/
 dist/
 typings/
+release/
 .DS_Store
 index.html

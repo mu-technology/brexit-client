@@ -23,7 +23,7 @@ module.exports = (workflow, gulp, $, config) => {
         const vendorSources = gulp.src(['dist/vendors/*.js']);
 
         return target
-            .pipe($.inject(cssSources), {ignorePath: '/dist' })
+            .pipe($.inject(cssSources, { ignorePath: '/dist' }))
             .pipe($.inject(vendorSources, { name: 'vendor', ignorePath: '/dist' }))
             .pipe($.inject(appSources, { name: 'app', ignorePath: '/dist' }))
             .pipe(gulp.dest('./dist/'));
