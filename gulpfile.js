@@ -3,8 +3,7 @@ const workflow = require('gulp-workflow');
 
 workflow
     .load(gulp)
+    .task('clean', 'Clean any build folders', ['clean:dist', 'clean:release'])
     .task('lint', 'Run all linters.', ['tslint'])
-    .task('build', 'Build the application', ['clean', 'build:js', 'build:index'], {
-        release: 'build for release'
-    })
-    .task('develop', 'watch for changes', ['watch']);
+    .task('develop', 'Develop the application', ['clean', 'lint', 'build:index:dev'])
+    .task('release', 'Release the application', ['clean', 'lint', 'build:js:release', 'build:index:release', 'package']);

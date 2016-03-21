@@ -1,26 +1,33 @@
 module.exports = (workflow, gulp, $, config) => {
 
-    const vendors = config.args.release ? ['node_modules/angular2/bundles/angular2-polyfills.min.js'] : config.vendors;
-    const dependencies = config.args.release ? ['bundle:vendors'] : [];
-
-    workflow.subtask('build:index', dependencies, () => {
+    workflow.subtask('build:index:dev', () => {
+        const vendors = config.vendors.map(v => v.path);
         const target = gulp.src('src/index.html');
-        const appSources = (config.args.release) ? gulp.src(['dist/main.bundle.js']) : gulp.src([]);
-        const vendorSources = (config.args.release) ? gulp.src(['dist/vendors/*.js']) : gulp.src(config.vendors);
+        const vendorSources = gulp.src(vendors);
 
-        target
+        return target
             .pipe($.inject(vendorSources, { name: 'vendor' }))
-            .pipe($.if(config.args.release,
-                $.inject(appSources, { name: 'app' }),
-                $.inject(gulp.src(['config.js'], { read: false }), {
-                    name: 'app',
-                    transform: () => `<script>System.import('app').then(null, console.error.bind(console));</script>`
-                }))
-            )
-            .pipe($.if(config.args.release, gulp.dest('./dist/'), gulp.dest('')));
+            .pipe($.inject(gulp.src(['config.js'], { read: false }), {
+                name: 'app',
+                transform: () => `<script>System.import('app').then(null, console.error.bind(console));</script>`
+            }))
+            .pipe(gulp.dest(''));
     });
 
-    workflow.subtask('bundle:vendors', () => {
+    workflow.subtask('build:index:release', ['build:vendors'], () => {
+        const target = gulp.src('src/index.html');
+        const appSources = gulp.src(['dist/main.bundle.js']);
+        const vendorSources = gulp.src(['dist/vendors/*.js']);
+
+        return target
+            .pipe($.inject(vendorSources, { name: 'vendor', ignorePath: '/dist' }))
+            .pipe($.inject(appSources, { name: 'app', ignorePath: '/dist' }))
+            .pipe(gulp.dest('./dist/'));
+    });
+
+    workflow.subtask('build:vendors', () => {
+        const vendors = config.vendors.filter(v => v.release).map(v => v.path);
+
         return gulp.src(vendors)
             .pipe(gulp.dest('./dist/vendors/'));
     });
