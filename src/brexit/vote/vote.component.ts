@@ -12,12 +12,13 @@ const BREXIT_QUESTION_ID = 1;
     selector: 'vote',
     template: `
     <div class="vote with-background">
+        <div class="mwroulis">
         <div class="vote-intro">
             <p>{{texts.intro}}</p>
         </div>
 
         <div class="vote-question">
-            <h3>{{ question.label }}</h3>
+            <h2>{{ question.label }}</h2>
         </div>
 
         <ul class="options-list">
@@ -27,6 +28,7 @@ const BREXIT_QUESTION_ID = 1;
                         (click)="submitVote(vote)">{{ vote.label }}</button>
             </li>
         </ul>
+        </div>
     </div>`,
     providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
