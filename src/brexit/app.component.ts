@@ -1,4 +1,4 @@
-import {Component, Inject} from 'angular2/core';
+import {Component, Inject, OnDestroy} from 'angular2/core';
 import {HeaderComponent} from './header/header.component';
 import {VoteComponent} from './vote/vote.component';
 import {logout} from './shared/brexit.actions';
@@ -8,14 +8,25 @@ import {logout} from './shared/brexit.actions';
     template: `
     <header></header>
     <vote></vote>
-    <button (click)="logout()">Log out</button>
+    <button *ngIf="isAuthenticated"
+            (click)="logout()">Log out</button>
     `,
     directives: [HeaderComponent, VoteComponent]
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+    isAuthenticated: boolean;
+    unsubscribe: Function;
 
+    constructor(@Inject('BrexitStore') private store: any) {
 
-    constructor(@Inject('BrexitStore') private store: any) {}
+        this.unsubscribe = this.store.subscribe(() => {
+            this.isAuthenticated = this.store.getState().user.isAuthenticated;
+        });
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe();
+    }
 
     logout() {
         this.store.dispatch(logout());

@@ -4,8 +4,7 @@ module.exports = (workflow, gulp) => {
 
         return gulp.src([
                 './dist/index.html',
-                './dist/**/*.js',
-                './dist/**/*.css',
+                './dist/**/*.*',
                 '!./dist/src/**/*.*'
             ])
             .pipe(gulp.dest('./release'));

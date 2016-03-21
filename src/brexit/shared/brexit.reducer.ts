@@ -5,16 +5,16 @@ const initialState = {
     items: [
         {
             id: 1,
-            label: 'Remain or Leave',
+            label: 'Should the United Kingdom remain a member of the European Union or leave the European Union?',
             answers: [
                 {
                     id: 1,
-                    label: 'Remain',
+                    label: 'Remain a member of the European Union',
                     isSelected: false,
                 },
                 {
                     id: 2,
-                    label: 'Leave',
+                    label: 'Leave the European Union',
                     isSelected: false
                 }
             ]

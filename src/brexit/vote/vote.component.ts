@@ -2,14 +2,24 @@ import {Component, Inject, OnDestroy} from 'angular2/core';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {Vote} from './vote';
 import {VoteService} from './vote.service';
-import {LOCALSTORAGE} from '../config';
+import {LOCALSTORAGE, TEXTS} from '../config';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {submitVote, voteSuccess, authSuccess} from '../shared/brexit.actions';
+
+const BREXIT_QUESTION_ID = 1;
 
 @Component({
     selector: 'vote',
     template: `
-    <div class="vote 123">
+    <div class="vote with-background">
+        <div class="vote-intro">
+            <p>{{texts.intro}}</p>
+        </div>
+
+        <div class="vote-question">
+            <h3>{{ question.label }}</h3>
+        </div>
+
         <ul class="options-list">
             <li class="options-list-item" *ngFor="#vote of votes">
                 <button class="option-button"
@@ -21,27 +31,33 @@ import {submitVote, voteSuccess, authSuccess} from '../shared/brexit.actions';
     providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
 export class VoteComponent implements OnDestroy {
-
+    question: Object;
     votes: Vote[] = this.getVotes(this.store.getState());
+    texts: Object;
     unsubscribe: Function;
 
     constructor (private voteService: VoteService, private authenticationService: AuthenticationService,
                  @Inject('BrexitStore') private store: any) {
+        const initialState = this.store.getState();
+        const isUserAuthenticated = initialState.user.isAuthenticated;
+        this.texts = TEXTS;
+        this.question = this.getQuestion(initialState, BREXIT_QUESTION_ID);
+
         this.unsubscribe = this.store.subscribe(() => {
             this.votes = this.getVotes(this.store.getState());
         });
 
-        const isUserAuthenticated = this.store.getState().user.isAuthenticated;
         if (isUserAuthenticated) {
             this.voteService.getVote()
                 .subscribe((vote) => {
-                    this.store.dispatch(voteSuccess(1, parseInt(vote.id, 10)));
+                    this.store.dispatch(voteSuccess(BREXIT_QUESTION_ID, parseInt(vote.id, 10)));
                 });
         }
     }
 
     submitVote (vote) {
         window.localStorage.setItem(LOCALSTORAGE.KEYS.VOTE, JSON.stringify(vote));
+
         const isUserAuthenticated = this.store.getState().user.isAuthenticated;
 
         if (!isUserAuthenticated) {
@@ -52,16 +68,17 @@ export class VoteComponent implements OnDestroy {
                         this.store.dispatch(submitVote());
                         this.voteService.postVote(vote)
                             .subscribe((data) => {
-                                this.store.dispatch(voteSuccess(1, data.id));
+                                this.store.dispatch(voteSuccess(BREXIT_QUESTION_ID, data.id));
                             });
                     },
                     (authErr) => { console.log('err ->', authErr); }
                 );
         } else {
             this.store.dispatch(submitVote());
+
             this.voteService.postVote(vote)
                 .subscribe((data) => {
-                    this.store.dispatch(voteSuccess(1, data.id));
+                    this.store.dispatch(voteSuccess(BREXIT_QUESTION_ID, data.id));
                 });
         }
     }
@@ -70,9 +87,14 @@ export class VoteComponent implements OnDestroy {
         this.unsubscribe();
     }
 
+    private getQuestion (state, questionId) {
+        //noinspection TypeScriptUnresolvedVariable
+        return state.questions.items.find(q => q.id === questionId);
+    }
+
     private getVotes (state) {
         //noinspection TypeScriptUnresolvedVariable
-        const question = state.questions.items.find(q => q.id === 1);
+        const question = state.questions.items.find(q => q.id === BREXIT_QUESTION_ID);
         return question.answers.map(a => new Vote(a));
     }
 }
