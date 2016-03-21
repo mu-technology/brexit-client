@@ -1,17 +1,17 @@
 language: node_js
 node_js:
-  - '4.4'
+- '4.4'
 install:
-  - npm install
-
+- npm install
 script:
-  - gulp release
-
+- gulp release
 deploy:
   provider: s3
-  access_key_id: "AKIAI3FXFNMM35JXIZ6A"
-  secret_access_key: "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"
-  bucket: "brexit.vote"
-  region: eu-west-1
-  skip_cleanup: true
-  local_dir: release
+  access_key_id: AKIAI3FXFNMM35JXIZ6A
+  secret_access_key:
+    secure: JTGYJ3x9KlmWPhaBjt2IqfwqOVXbw7GOXKPGuNttwc8kOntsosekkAsHhxFInN7cxf/osmf5/GIULLHX7uWUysppz6tOGnEvznkWP25V8T+rb0QenAT0XpL7Y7WnNEtCpMoXf3oU7As7tvZrzl4nDLM9Tu8UcoaKX90zZ2kQh2tgwyB3V08vZjgLB2Z1qgitEXTDhkQCwRpgHk+3P9GfESclJ0tXkshKwb5Gi62MBwf16XtF0un/zIzKfC4HwwFi0xnzb1lrzKgTrryo9VdYhUoI2Bzd9Edc7xz2I3Mgsdqa426fDU5caAvRirelTdrGS/gZfTPYRMM0Tuulo+NN31ES/RwSThaA7UeUezoix/M3CbCwaFgxPm8UQzYyV+o0xX/nVvypEwfqZDapZZpM/SG8nS+CkLlB8/T4RzGDX8tPqZ9NIG0zkJBfTxb5oaR5JpooQl5NU5nJ7OQ0Aya3KuOPEjQ43WyoT4mbwSuG5N9tp/ioG6iyhobDXZe6w504EUQex2y6mFdjh7TUz7Fc56RimE7yiS3t7HZvFTbnC8+8mp4pG8H/1oQ5j6eIV6L2QE5WS8bIr2vbHnVZ8M3j76pVSWcGETqZh5NBNeiRceVa2xfhassLE5IJ1XFNVNd2jEEoQVQZv8Y9p7muyMuXcjoW84q/1SwYSFibeNTSUrY=
+  bucket: brexit.vote
+  local-dir: release
+  acl: ''
+  on:
+    repo: mu-technology/brexit-client
