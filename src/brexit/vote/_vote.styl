@@ -4,24 +4,22 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 5% 15%;
-
-	.mwroulis {
-		background: rgba(0,0,0,0.5);
-	}
+	width: 60%;
+	height: 80%;
+	background: rgba(0,0,0,0.7);
+	box-shadow: 5px 5px 5px 0px #333333;
 
 	.vote-intro {
 		text-align: justify;
 		padding: 5px 25px;
-		background: rgba(255, 255, 255, 0.9);
-		box-shadow: 5px 5px 5px 0px #333333;
-		margin-bottom: 30px;
+		color: aliceblue;
 	}
 
 
 	.vote-question {
 		text-align: center;
-		color: midnightblue;
+		color: aliceblue;
+		padding: 25px 50px;
 	}
 
 	.options-list {
@@ -50,22 +48,5 @@
 				color: white;
 			}
 		}
-	}
-}
-
-.vote.with-background {
-	position: relative;
-
-	&::after {
-		content: '';
-		background: url('assets/brexit-bg.jpg') no-repeat;
-		background-size: 100%;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		opacity: 0.7;
-		z-index: -1;
 	}
 }

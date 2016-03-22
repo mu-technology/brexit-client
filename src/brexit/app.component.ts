@@ -7,7 +7,9 @@ import {logout} from './shared/brexit.actions';
     selector: 'brexit',
     template: `
     <header></header>
-    <vote></vote>
+    <div class="main-container with-background">
+        <vote class="vote"></vote>
+    </div>
     <button *ngIf="isAuthenticated"
             (click)="logout()">Log out</button>
     `,

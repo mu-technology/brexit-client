@@ -11,8 +11,6 @@ const BREXIT_QUESTION_ID = 1;
 @Component({
     selector: 'vote',
     template: `
-    <div class="vote with-background">
-        <div class="mwroulis">
         <div class="vote-intro">
             <p>{{texts.intro}}</p>
         </div>
@@ -27,9 +25,7 @@ const BREXIT_QUESTION_ID = 1;
                         [class.selected]="vote.isSelected"
                         (click)="submitVote(vote)">{{ vote.label }}</button>
             </li>
-        </ul>
-        </div>
-    </div>`,
+        </ul>`,
     providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
 export class VoteComponent implements OnDestroy {
