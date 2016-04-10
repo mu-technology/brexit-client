@@ -8,7 +8,7 @@ module.exports = (workflow, gulp, $) => {
     });
 
     workflow.subtask('build:js:release', ['compile:js'], () => {
-        return gulp.src('./dist/src/main.js')
+        return gulp.src('./dist/main.js')
             .pipe($.jspm({ selfExecutingBundle: true }))
             .pipe(gulp.dest('./dist/'));
     });
