@@ -3,6 +3,7 @@ node_js:
 - '4.4'
 before_install:
 - npm install -g jspm
+- npm install -g typings
 - jspm config registries.github.auth $JSPM_GITHUB_AUTH_TOKEN
 install:
 - npm install
