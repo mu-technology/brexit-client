@@ -22,7 +22,9 @@ System.config({
         }
       }
     },
-    "/angulartics2": {"defaultExtension": "js"}
+    "/angulartics2": {
+      "defaultExtension": "js"
+    }
   },
 
   map: {
