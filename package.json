@@ -29,6 +29,7 @@
   },
   "jspm": {
     "dependencies": {
+      "angulartics2": "npm:angulartics2@^1.0.1",
       "ts": "github:frankwallis/plugin-typescript@^4.0.2"
     },
     "devDependencies": {
