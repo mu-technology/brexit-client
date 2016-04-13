@@ -6,6 +6,7 @@ import {VoteComponent} from './vote/vote.component';
 import {logout} from './shared/brexit.actions';
 import {OneComponent} from './temp/one';
 import {TwoComponent} from './temp/two';
+import {Angulartics2} from 'angulartics2';
 
 @Component({
     selector: 'brexit',
@@ -33,11 +34,15 @@ export class AppComponent implements OnDestroy {
     isAuthenticated: boolean;
     unsubscribe: Function;
 
-    constructor(@Inject('BrexitStore') private store: any) {
+    constructor(public angulartics2: Angulartics2, public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+                @Inject('BrexitStore') private store: any) {
 
         this.unsubscribe = this.store.subscribe(() => {
             this.isAuthenticated = this.store.getState().user.isAuthenticated;
         });
+
+        console.log('this.angulartics2 ->', this.angulartics2);
+        console.log('this.angulartics2GoogleAnalytics ->', this.angulartics2GoogleAnalytics);
     }
 
     ngOnDestroy() {
