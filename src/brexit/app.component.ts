@@ -32,7 +32,6 @@ export class AppComponent implements OnDestroy {
 
     constructor(public angulartics2: Angulartics2, public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
                 @Inject('BrexitStore') private store: any) {
-        
         this.unsubscribe = this.store.subscribe(() => {
             this.isAuthenticated = this.store.getState().user.isAuthenticated;
         });
