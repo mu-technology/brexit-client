@@ -12,21 +12,17 @@ import {Angulartics2} from 'angulartics2';
     selector: 'brexit',
     template: `
     <nav>
+        <a [routerLink]="['Home']">Home</a>
         <a [routerLink]="['One']">One</a>
         <a [routerLink]="['Two']">Two</a>
     </nav>
     <router-outlet></router-outlet>
-    <header></header>
-    <div class="main-container with-background">
-        <vote class="vote"></vote>
-    </div>
-    <button *ngIf="isAuthenticated"
-            (click)="logout()">Log out</button>
     `,
     directives: [HeaderComponent, VoteComponent, ROUTER_DIRECTIVES],
     providers: [Angulartics2GoogleAnalytics]
 })
 @RouteConfig([
+    { path: '/', name: 'Home', component: OneComponent },
     { path: '/one', name: 'One', component: OneComponent },
     { path: '/two', name: 'Two', component: TwoComponent }
 ])
@@ -36,13 +32,10 @@ export class AppComponent implements OnDestroy {
 
     constructor(public angulartics2: Angulartics2, public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
                 @Inject('BrexitStore') private store: any) {
-
+        
         this.unsubscribe = this.store.subscribe(() => {
             this.isAuthenticated = this.store.getState().user.isAuthenticated;
         });
-
-        console.log('this.angulartics2 ->', this.angulartics2);
-        console.log('this.angulartics2GoogleAnalytics ->', this.angulartics2GoogleAnalytics);
     }
 
     ngOnDestroy() {

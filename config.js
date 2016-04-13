@@ -21,9 +21,6 @@ System.config({
           "loader": "ts"
         }
       }
-    },
-    "/angulartics2": {
-      "defaultExtension": "js"
     }
   },
 
