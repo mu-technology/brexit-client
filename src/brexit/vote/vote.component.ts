@@ -11,21 +11,23 @@ const BREXIT_QUESTION_ID = 1;
 @Component({
     selector: 'vote',
     template: `
-        <div class="vote-intro">
-            <p>{{texts.intro}}</p>
-        </div>
-
-        <div class="vote-question">
-            <h2>{{ question.label }}</h2>
-        </div>
-
-        <ul class="options-list">
-            <li class="options-list-item" *ngFor="#vote of votes">
-                <button class="option-button"
-                        [class.selected]="vote.isSelected"
-                        (click)="submitVote(vote)">{{ vote.label }}</button>
-            </li>
-        </ul>`,
+        <div class="vote">
+            <div class="vote-intro">
+                <p>{{texts.intro}}</p>
+            </div>
+        
+            <div class="vote-question">
+                <h2>{{ question.label }}</h2>
+            </div>
+    
+            <ul class="options-list">
+                <li class="options-list-item" *ngFor="#vote of votes">
+                    <button class="option-button"
+                            [class.selected]="vote.isSelected"
+                            (click)="submitVote(vote)">{{ vote.label }}</button>
+                </li>
+            </ul>
+        </div>`,
     providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
 export class VoteComponent implements OnDestroy {
