@@ -13,19 +13,18 @@ const BREXIT_QUESTION_ID = 1;
 @Component({
     selector: 'vote',
     template: `
-        <md-card>
-            <p>{{texts.intro}}</p>
-        </md-card>
-        <md-card>
-            <h2>{{ question.label }}</h2>
-            <md-card-actions>
+        <md-card class="vote-card">
+            <md-card-title>{{ question.label }}</md-card-title>
+            <img md-card-image src="assets/brexit-bg.jpg">
+            <md-card-actions class="vote-button-group">
                 <button md-raised-button class="option-button" *ngFor="#vote of votes"
                             [class.selected]="vote.isSelected"
                             (click)="submitVote(vote)">{{ vote.label }}</button>
             </md-card-actions>
         </md-card>`,
     directives: [MD_CARD_DIRECTIVES, MdButton],
-    providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
+    providers: [HTTP_PROVIDERS, VoteService, AuthenticationService],
+    styleUrls: ['src/brexit/vote/vote.css']
 })
 export class VoteComponent implements OnDestroy {
     question: Object;
