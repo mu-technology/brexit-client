@@ -5,29 +5,26 @@ import {VoteService} from './vote.service';
 import {LOCALSTORAGE, TEXTS} from '../config';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {submitVote, voteSuccess, authSuccess} from '../shared/brexit.actions';
+import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
+import {MdButton} from '@angular2-material/button';
 
 const BREXIT_QUESTION_ID = 1;
 
 @Component({
     selector: 'vote',
     template: `
-        <div class="vote">
-            <div class="vote-intro">
-                <p>{{texts.intro}}</p>
-            </div>
-        
-            <div class="vote-question">
-                <h2>{{ question.label }}</h2>
-            </div>
-    
-            <ul class="options-list">
-                <li class="options-list-item" *ngFor="#vote of votes">
-                    <button class="option-button"
+        <md-card>
+            <p>{{texts.intro}}</p>
+        </md-card>
+        <md-card>
+            <h2>{{ question.label }}</h2>
+            <md-card-actions>
+                <button md-raised-button class="option-button" *ngFor="#vote of votes"
                             [class.selected]="vote.isSelected"
                             (click)="submitVote(vote)">{{ vote.label }}</button>
-                </li>
-            </ul>
-        </div>`,
+            </md-card-actions>
+        </md-card>`,
+    directives: [MD_CARD_DIRECTIVES, MdButton],
     providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
 export class VoteComponent implements OnDestroy {

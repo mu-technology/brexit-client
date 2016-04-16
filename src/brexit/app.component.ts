@@ -6,18 +6,17 @@ import {logout} from './shared/brexit.actions';
 import {OneComponent} from './temp/one';
 import {TwoComponent} from './temp/two';
 import {Angulartics2} from 'angulartics2';
+import {MdToolbar} from '@angular2-material/toolbar';
 
 @Component({
     selector: 'brexit',
     template: `
-    <header class="brexit-header">
-        <h1>Brexit</h1>
-    </header>
-    <div class="main-container with-background">
-        <router-outlet></router-outlet>
-    </div>
+    <md-toolbar color="primary">
+        <span>Brexit</span>
+    </md-toolbar>
+    <router-outlet></router-outlet>
     `,
-    directives: [VoteComponent, ROUTER_DIRECTIVES],
+    directives: [VoteComponent, ROUTER_DIRECTIVES, MdToolbar],
     providers: [Angulartics2GoogleAnalytics]
 })
 @RouteConfig([
