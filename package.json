@@ -29,10 +29,6 @@
   },
   "jspm": {
     "dependencies": {
-      "@angular2-material/card": "npm:@angular2-material/card@^2.0.0-alpha.2",
-      "@angular2-material/core": "npm:@angular2-material/core@^2.0.0-alpha.2",
-      "@angular2-material/toolbar": "npm:@angular2-material/toolbar@^2.0.0-alpha.2",
-      "angulartics2": "npm:angulartics2@^1.0.1",
       "ts": "github:frankwallis/plugin-typescript@^4.0.2"
     },
     "devDependencies": {
