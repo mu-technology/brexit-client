@@ -17,6 +17,10 @@ import {TEXTS} from '../config';
             }
             
             .intro-card { padding: 40px; }
+            .intro-card-text {
+                text-align: justify;
+                line-height: 30px;
+            }
             .intro-card-actions { 
                 display: flex;
                 justify-content: center;
@@ -33,7 +37,7 @@ import {TEXTS} from '../config';
             }
         </style>
         <md-card class="intro-card">
-            <p>{{ intro }}</p>
+            <p class="intro-card-text">{{ intro }}</p>
             <md-card-actions class="intro-card-actions">
                 <button md-raised-button (click)="onClick()">Share your opinion</button>
             </md-card-actions>
