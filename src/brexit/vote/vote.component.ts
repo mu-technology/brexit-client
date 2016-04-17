@@ -13,6 +13,28 @@ const BREXIT_QUESTION_ID = 1;
 @Component({
     selector: 'vote',
     template: `
+        <style>
+        :host {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .vote-button-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .vote-button-group button {
+            margin: 10px 0;
+        }
+        
+        @media only screen and (min-width: 668px){
+            .vote-card {
+                width: 50%;
+            }
+        }
+        </style>
         <md-card class="vote-card">
             <md-card-title>{{ question.label }}</md-card-title>
             <img md-card-image src="assets/brexit-bg.jpg">
@@ -23,8 +45,7 @@ const BREXIT_QUESTION_ID = 1;
             </md-card-actions>
         </md-card>`,
     directives: [MD_CARD_DIRECTIVES, MdButton],
-    providers: [HTTP_PROVIDERS, VoteService, AuthenticationService],
-    styleUrls: ['src/brexit/vote/vote.css']
+    providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
 export class VoteComponent implements OnDestroy {
     question: Object;
