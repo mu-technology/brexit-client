@@ -44,7 +44,7 @@ const BREXIT_QUESTION_ID = 1;
             <md-card-title>{{ question.label }}</md-card-title>
             <img md-card-image src="assets/brexit-bg.jpg">
             <md-card-actions class="vote-button-group">
-                <button md-raised-button class="option-button" *ngFor="#vote of votes"
+                <button md-raised-button *ngFor="#vote of votes"
                             [class.selected]="vote.isSelected"
                             (click)="submitVote(vote)">{{ vote.label }}</button>
             </md-card-actions>
@@ -110,12 +110,10 @@ export class VoteComponent implements OnDestroy {
     }
 
     private getQuestion (state, questionId) {
-        //noinspection TypeScriptUnresolvedVariable
         return state.questions.items.find(q => q.id === questionId);
     }
 
     private getVotes (state) {
-        //noinspection TypeScriptUnresolvedVariable
         const question = state.questions.items.find(q => q.id === BREXIT_QUESTION_ID);
         return question.answers.map(a => new Vote(a));
     }

@@ -31,7 +31,6 @@ const question = (state, action) => {
             }
             return Object.assign({}, state, {
                 answers: state.answers.map((a) => {
-                    //noinspection TypeScriptUnresolvedVariable
                     a.isSelected = (a.id === action.answerId);
                     return a;
                 })

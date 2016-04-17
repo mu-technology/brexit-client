@@ -31,8 +31,6 @@ export class Oauth1 {
             popupWindow = this.popup.open('', this.defaults.name, this.defaults.popupOptions/*, this.defaults.redirectUri*/);
         }
 
-        console.log('serverUrl ->', serverUrl);
-
         return this.http.post(serverUrl, JSON.stringify(this.defaults))
             .flatMap((response: Response) => {
                 if (this.config.cordova) {
