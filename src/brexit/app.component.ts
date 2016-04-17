@@ -19,7 +19,7 @@ import {IntroComponent} from './intro/into.component';
     <md-toolbar color="primary" class="toolbar">
         <span>Brexit</span>
         <span class="fill-space"></span>
-        <button class="logout-btn" md-button (click)="logout()">Logout</button>
+        <button class="logout-btn" md-button *ngIf="isAuthenticated" (click)="logout()">Logout</button>
     </md-toolbar>
     <router-outlet></router-outlet>
     `,
