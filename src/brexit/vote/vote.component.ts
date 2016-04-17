@@ -29,6 +29,11 @@ const BREXIT_QUESTION_ID = 1;
             margin: 10px 0;
         }
         
+        .vote-button-group button.selected {
+            background-color: #2196f3;
+            color: white;
+        }
+        
         @media only screen and (min-width: 668px){
             .vote-card {
                 width: 50%;
