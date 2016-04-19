@@ -7,6 +7,7 @@ import {AuthenticationService} from '../authentication/authentication.service';
 import {submitVote, voteSuccess, authSuccess} from '../shared/brexit.actions';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MdButton} from '@angular2-material/button';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 const BREXIT_QUESTION_ID = 1;
 
@@ -18,6 +19,10 @@ const BREXIT_QUESTION_ID = 1;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        
+        .vote-card-title {
+            text-align: center;
         }
         
         .vote-button-group {
@@ -34,6 +39,13 @@ const BREXIT_QUESTION_ID = 1;
             color: white;
         }
         
+        .results-btn {
+            color: #2196f3;   
+        }
+        
+        .results-btn:hover {
+            background: white;
+        }
         @media only screen and (min-width: 668px){
             .vote-card {
                 width: 50%;
@@ -41,15 +53,16 @@ const BREXIT_QUESTION_ID = 1;
         }
         </style>
         <md-card class="vote-card">
-            <md-card-title>{{ question.label }}</md-card-title>
+            <md-card-title class="vote-card-title">{{ question.label }}</md-card-title>
             <img md-card-image src="assets/brexit-bg.jpg">
             <md-card-actions class="vote-button-group">
                 <button md-raised-button *ngFor="#vote of votes"
-                            [class.selected]="vote.isSelected"
-                            (click)="submitVote(vote)">{{ vote.label }}</button>
+                        [class.selected]="vote.isSelected"
+                        (click)="submitVote(vote)">{{ vote.label }}</button>
+                <button class="results-btn" md-button [routerLink]="['Results']">View Results</button>                        
             </md-card-actions>
         </md-card>`,
-    directives: [MD_CARD_DIRECTIVES, MdButton],
+    directives: [MD_CARD_DIRECTIVES, MdButton, ROUTER_DIRECTIVES],
     providers: [HTTP_PROVIDERS, VoteService, AuthenticationService]
 })
 export class VoteComponent implements OnDestroy {
@@ -57,6 +70,7 @@ export class VoteComponent implements OnDestroy {
     votes: Vote[] = this.getVotes(this.store.getState());
     texts: Object;
     unsubscribe: Function;
+    private hasSelectedVote: boolean = false;
 
     constructor (private voteService: VoteService, private authenticationService: AuthenticationService,
                  @Inject('BrexitStore') private store: any) {
@@ -72,6 +86,9 @@ export class VoteComponent implements OnDestroy {
         if (isUserAuthenticated) {
             this.voteService.getVote()
                 .subscribe((vote) => {
+                    if (vote) {
+                        this.hasSelectedVote = true;
+                    }
                     this.store.dispatch(voteSuccess(BREXIT_QUESTION_ID, parseInt(vote.id, 10)));
                 });
         }

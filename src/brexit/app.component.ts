@@ -7,6 +7,7 @@ import {Angulartics2} from 'angulartics2';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MdButton} from '@angular2-material/button';
 import {IntroComponent} from './intro/into.component';
+import {ResultsComponent} from './results/results.component';
 
 @Component({
     selector: 'brexit',
@@ -28,7 +29,8 @@ import {IntroComponent} from './intro/into.component';
 })
 @RouteConfig([
     { path: '/', name: 'Intro', component: IntroComponent },
-    { path: '/vote', name: 'Vote', component: VoteComponent }
+    { path: '/vote', name: 'Vote', component: VoteComponent },
+    { path: '/results', name: 'Results', component: ResultsComponent }
 ])
 export class AppComponent implements OnDestroy {
     isAuthenticated: boolean;
