@@ -22,7 +22,7 @@
     "gulp-tslint": "^4.3.3",
     "gulp-typescript": "^2.12.1",
     "gulp-util": "^3.0.7",
-    "gulp-workflow": "^1.1.0",
+    "gulp-workflow": "1.1.0",
     "jspm": "^0.16.31",
     "tslint": "^3.6.0",
     "typings": "^0.7.9"
