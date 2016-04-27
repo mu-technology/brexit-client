@@ -11,6 +11,33 @@ declare var __moduleName: string;
 @Component({
     selector: 'brexit-intro',
     template: `
+        <style>
+            :host {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .intro-card { padding: 40px; }
+            .intro-card-text {
+                text-align: justify;
+                line-height: 30px;
+            }
+            .intro-card-actions {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .intro-card-actions button:hover {
+                background: #2196f3;
+                color: white;
+            }
+            @media only screen and (min-width: 668px){
+                .intro-card {
+                    width: 50%;
+                }
+            }
+        </style>
         <md-card class="intro-card">
             <p class="intro-card-text">{{ intro }}</p>
             <md-card-actions class="intro-card-actions">
@@ -18,8 +45,6 @@ declare var __moduleName: string;
             </md-card-actions>
         </md-card>
     `,
-    moduleId: __moduleName,
-    styleUrls: ['intro.css'],
     directives: [MD_CARD_DIRECTIVES, MdButton],
     providers: [AuthenticationService]
 })
