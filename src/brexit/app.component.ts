@@ -6,7 +6,7 @@ import {logout} from './shared/brexit.actions';
 import {Angulartics2} from 'angulartics2';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MdButton} from '@angular2-material/button';
-import {IntroComponent} from './intro/into.component';
+import {IntroComponent} from './intro/intro.component';
 import {ResultsComponent} from './results/results.component';
 
 @Component({
