@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "brexit-client",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -40,7 +40,7 @@
     "@angular2-material/card": "^2.0.0-alpha.2",
     "@angular2-material/core": "^2.0.0-alpha.2",
     "@angular2-material/toolbar": "^2.0.0-alpha.2",
-    "angular2": "2.0.0-beta.15",
+    "angular2": "2.0.0-beta.16",
     "angulartics2": "^1.0.1",
     "es6-promise": "^3.1.2",
     "es6-shim": "^0.35.0",
@@ -48,6 +48,6 @@
     "redux-logger": "^2.6.1",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
-    "zone.js": "0.6.10"
+    "zone.js": "0.6.12"
   }
 }
