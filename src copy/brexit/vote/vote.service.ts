@@ -42,9 +42,8 @@ export class VoteService {
             this.authentication.authenticate()
                 .subscribe(
                     (data) => {
-                        console.log('data', data);
                         const vote = new Vote(JSON.parse(window.localStorage.getItem('brexit_vote')));
-                        console.log('vote 11', vote);
+
                         this.postVote(vote)
                             .subscribe(
                                 (response) => { console.log('response', response); },

@@ -42,16 +42,41 @@ System.config({
       "defaultExtension": "js",
       "main": "button.js"
     },
+    "@ngrx/store": {
+      "defaultExtension": "js",
+      "main": "index.js"
+    },
+    "ngrx-store-logger": {
+      "defaultExtension": "js",
+      "main": "dist/index.js"
+    },
     "angulartics2": {
       "defaultExtension": "js",
       "main": "index.js"
+    },
+    "ng2-nvd3": {
+      "defaultExtension": "js",
+      "main": "build/lib/ng2-nvd3.js"
+    },
+    "nvd3": {
+      "defaultExtension": "js",
+      "main": "build/nv.d3.js"
+    },
+    "d3": {
+      "defaultExtension": "js",
+      "main": "d3.js"
     }
   },
 
   map: {
     "@angular2-material": "node_modules/@angular2-material",
+    "@ngrx": "node_modules/@ngrx",
     "angular2": "node_modules/angular2",
     "angulartics2": "node_modules/angulartics2",
+    "d3": "node_modules/d3",
+    "ng2-nvd3": "node_modules/ng2-nvd3",
+    "ngrx-store-logger": "node_modules/ngrx-store-logger",
+    "nvd3": "node_modules/nvd3",
     "redux": "node_modules/redux/dist/redux.js",
     "redux-logger": "node_modules/redux-logger/dist/index.js",
     "rxjs": "node_modules/rxjs",
