@@ -1,7 +1,8 @@
 import {Component} from 'angular2/core';
 import {MdButton} from '@angular2-material/button';
-import {Store, Action} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
+import {LOGOUT} from '../../shared/user-reducers';
 
 @Component({
     selector: 'logout',
@@ -27,6 +28,6 @@ export class LogoutComponent {
     }
 
     logout() {
-        this.store.dispatch(<Action>{ type: 'LOGOUT' });
+        this.store.dispatch(LOGOUT);
     }
 }

@@ -1,5 +1,7 @@
 import {Reducer, Action} from '@ngrx/store';
 
+export const LOGOUT = <Action>{ type: 'LOGOUT' };
+
 const userInitialState = {
     data: {},
     isAuthenticated: !!window.localStorage.getItem('brexit_token')

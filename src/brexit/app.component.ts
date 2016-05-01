@@ -10,10 +10,7 @@ import {ToolbarComponent} from './toolbar/toolbar.component';
     directives: [ToolbarComponent]
 })
 export class AppComponent {
-    isUserAuthenticated: any;
 
     constructor(public store: Store) {
-        this.isUserAuthenticated = store.select('user')
-            .map(v => v.isAuthenticated);
     }
 }
