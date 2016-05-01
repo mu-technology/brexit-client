@@ -1,6 +1,8 @@
 import {Reducer, Action} from '@ngrx/store';
 
-export const LOGOUT = <Action>{ type: 'LOGOUT' };
+export const LOGOUT = () => <Action>{ type: 'LOGOUT' };
+export const AUTH_START = () => <Action>{ type: 'AUTH_START'};
+export const AUTH_SUCCESS = (payload) => <Action>{ type: 'AUTH_SUCCESSFUL', payload };
 
 const userInitialState = {
     data: {},
@@ -9,7 +11,7 @@ const userInitialState = {
 
 export const user: Reducer = (state = userInitialState, action: Action) => {
     switch (action.type) {
-        case 'AUTHENTICATE_USER':
+        case 'AUTH_START':
             return state;
 
         case 'AUTH_SUCCESSFUL':

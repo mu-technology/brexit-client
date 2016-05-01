@@ -45,7 +45,6 @@ declare var __moduleName: string;
                 <button md-raised-button (click)="onClick()">Share your opinion</button>
             </md-card-actions>
         </md-card>
-        <pie-chart></pie-chart>
     `,
     directives: [MD_CARD_DIRECTIVES, MdButton, PieChartComponent],
     providers: [AuthenticationService]

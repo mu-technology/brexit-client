@@ -77,8 +77,6 @@ System.config({
     "ng2-nvd3": "node_modules/ng2-nvd3",
     "ngrx-store-logger": "node_modules/ngrx-store-logger",
     "nvd3": "node_modules/nvd3",
-    "redux": "node_modules/redux/dist/redux.js",
-    "redux-logger": "node_modules/redux-logger/dist/index.js",
     "rxjs": "node_modules/rxjs",
     "ts": "github:frankwallis/plugin-typescript@4.0.2",
     "typescript": "npm:typescript@1.8.9",

@@ -1,12 +1,24 @@
 import {bootstrap} from 'angular2/platform/browser';
-import {AppComponent} from './brexit/app.component';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import {ROUTER_PROVIDERS} from 'angular2/router';
+import {Auth, AUTH_PROVIDERS} from './brexit/authentication/auth';
 import {provideStore} from '@ngrx/store';
 import {loggerMiddleware} from 'ngrx-store-logger';
+import {AppComponent} from './brexit/app.component';
 import {user} from './shared/user-reducers';
+import {polls} from './shared/poll-reducer';
+import {WEB_API} from './brexit/config';
 
 bootstrap(AppComponent, [
-    provideStore({user}),
-    loggerMiddleware()
+    HTTP_PROVIDERS,
+    ROUTER_PROVIDERS,
+    provideStore({user, polls}),
+    loggerMiddleware(),
+    Auth,
+    AUTH_PROVIDERS({
+        providers: { twitter: {} },
+        baseUrl: WEB_API.DOMAIN
+    }),
 ]).then(
     () => console.log('Brexit is running...'),
     () => console.error('Error running Brexit...')
