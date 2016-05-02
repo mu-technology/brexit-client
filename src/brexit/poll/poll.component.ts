@@ -4,6 +4,7 @@ import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {AnswerListComponent} from './answer-list/answer-list.component';
+import {ResultsButtonComponent} from '../results/results-button.component';
 import {SUCCESSFUL_ANSWER} from '../../shared/poll-reducer';
 import {Answer} from './answer';
 import {PollService} from './poll.service';
@@ -33,10 +34,11 @@ import {PollService} from './poll.service';
             <img md-card-image src="assets/brexit-bg.jpg">
             <md-card-actions>
                 <brexit-answer-list [answers]="answers" (change)="selectAnswer($event)"></brexit-answer-list>
+                <results-button></results-button>
             </md-card-actions>
         </md-card>
     `,
-    directives: [MD_CARD_DIRECTIVES, AnswerListComponent],
+    directives: [AnswerListComponent, MD_CARD_DIRECTIVES, ResultsButtonComponent],
     providers: [PollService]
 })
 export class PollComponent {
