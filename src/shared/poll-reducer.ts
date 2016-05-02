@@ -2,7 +2,7 @@ import {Answer} from '../brexit/poll/answer';
 import {Poll} from '../brexit/poll/poll';
 import {Reducer, Action} from '@ngrx/store';
 
-export const SUCCESSFUL_ANSWER = (payload= { questionId: '', answerId: 0 }) => ({ type: 'SUCCESSFUL_ANSWER', payload});
+export const SUCCESSFUL_ANSWER = (payload = { questionId: '', answerId: 0 }) => ({ type: 'SUCCESSFUL_ANSWER', payload});
 
 const pollInitialState = {
     items: [
@@ -32,8 +32,7 @@ export const polls: Reducer = (state = pollInitialState, action: Action) => {
 
         case 'SUCCESSFUL_ANSWER':
             return Object.assign({}, state, {
-                items: state.items.map(i => pollItem(i, action.payload)),
-                isLoading: false
+                items: state.items.map(i => pollItem(i, action.payload))
             });
 
         default:
@@ -42,7 +41,7 @@ export const polls: Reducer = (state = pollInitialState, action: Action) => {
 };
 
 
-function pollItem (state, payload) {
+function pollItem (state, payload = { questionId: '', answerId: 0 }) {
     if (state.id !== payload.questionId) {
         return state;
     }

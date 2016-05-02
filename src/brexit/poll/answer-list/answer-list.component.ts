@@ -24,15 +24,15 @@ import {Answer} from '../answer';
                 [class.selected]="answer.isSelected"
                 (click)="selectAnswer(answer)">{{ answer.label }}</button>
     `,
-    directices: [MdButton],
     inputs: ['answers'],
-    outputs: ['onAnswerChange:change']
+    outputs: ['onAnswerChange:change'],
+    directives: [MdButton]
 })
 export class AnswerListComponent {
     answers: Answer[];
     onAnswerChange: EventEmitter = new EventEmitter();
 
-    selectAnswer(answer) {
+    selectAnswer(answer: Answer) {
         this.onAnswerChange.emit(answer);
     }
 }

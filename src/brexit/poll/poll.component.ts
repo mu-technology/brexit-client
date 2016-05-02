@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {AnswerListComponent} from './answer-list/answer-list.component';
 import {SUCCESSFUL_ANSWER} from '../../shared/poll-reducer';
 import {Answer} from './answer';
+import {PollService} from './poll.service';
 
 @Component({
     selector: 'brexit-poll',
@@ -35,41 +36,48 @@ import {Answer} from './answer';
             </md-card-actions>
         </md-card>
     `,
-    directives: [MD_CARD_DIRECTIVES, AnswerListComponent]
+    directives: [MD_CARD_DIRECTIVES, AnswerListComponent],
+    providers: [PollService]
 })
 export class PollComponent {
     private answers: Answer[];
-    private isAuthenticated: boolean;
     private question: string;
 
-    constructor(private router: Router, private store: Store) {
+    constructor(private router: Router, private store: Store, private pollService: PollService) {
         const polls: Observable = this.store.select('polls');
-        const user = this.store.select('user');
+        const user: Observable = this.store.select('user');
 
         polls.subscribe(poll => {
             const brexitPoll = poll.items.find(p => p.id === 'BREXIT');
+
             this.question = brexitPoll.question;
             this.answers = brexitPoll.answers;
         });
 
         user.subscribe(u => {
-            this.isAuthenticated = u.isAuthenticated;
-
-            if (!this.isAuthenticated) {
+            if (!u.isAuthenticated) {
                 this.goToIntro();
             }
         });
+
+        this.pollService.getUserAnswer()
+            .subscribe(a =>
+                this.store
+                    .dispatch(SUCCESSFUL_ANSWER({
+                        questionId: 'BREXIT',
+                        answerId: a.id
+                    })));
     }
 
     selectAnswer(answer) {
-        if (!this.isAuthenticated) {
-            this.goToIntro();
-        } else {
-            this.store.dispatch(SUCCESSFUL_ANSWER({
-                questionId: 'BREXIT',
-                answerId: answer.id
-            }));
-        }
+        this.pollService
+            .postAnswer(answer)
+            .subscribe(a => {
+                this.store.dispatch(SUCCESSFUL_ANSWER({
+                    questionId: 'BREXIT',
+                    answerId: a.id
+                }));
+            });
     }
 
     private goToIntro() {

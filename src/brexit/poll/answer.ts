@@ -4,9 +4,9 @@ export class Answer {
     label: string;
     isSelected: boolean;
 
-    constructor(vote) {
-        this.id = vote.id || null;
-        this.label = vote.label || '';
-        this.isSelected = !!vote.isSelected;
+    constructor(answer) {
+        this.id = parseInt(answer.id, 10) || 0;
+        this.label = answer.label || '';
+        this.isSelected = !!answer.isSelected;
     }
 }
