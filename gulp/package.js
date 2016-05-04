@@ -5,7 +5,8 @@ module.exports = (workflow, gulp) => {
         return gulp.src([
                 './dist/index.html',
                 './dist/**/*.*',
-                '!./dist/brexit/**/*.*'
+                '!./dist/brexit/**/*.*',
+                '!./dist/shared/**/*.*'
             ])
             .pipe(gulp.dest('./release'));
     });

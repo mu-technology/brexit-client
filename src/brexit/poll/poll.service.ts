@@ -1,13 +1,15 @@
 import {Injectable} from 'angular2/core';
-import {Http, Headers, RequestOptions, Response} from 'angular2/http';
-import {WEB_API, LOCALSTORAGE} from '../config';
+import {Http} from 'angular2/http';
+import {WEB_API} from '../config';
 import {Answer} from './answer';
-import {Observable} from 'rxjs/Observable';
+import {BackendRequestService} from '../../shared/backend-request.service';
 
 @Injectable()
-export class PollService {
+export class PollService extends BackendRequestService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+        super();
+    }
 
     postAnswer(answer: Answer) {
         const URL = `${WEB_API.DOMAIN}${WEB_API.ENDPOINTS.VOTE}`;
@@ -23,19 +25,9 @@ export class PollService {
         const URL = `${WEB_API.DOMAIN}${WEB_API.ENDPOINTS.VOTE}`;
         const requestOptions = this.getRequestOptions();
 
-        return this.http.get(URL, requestOptions)
+        return this.http
+            .get(URL, requestOptions)
             .map(res => new Answer(res.json().vote))
             .catch(this.handleError.bind(this));
-    }
-
-    private getRequestOptions() {
-        const token = window.localStorage.getItem(LOCALSTORAGE.KEYS.TOKEN);
-        const headers = new Headers({ 'Authorization': `Bearer ${token}`});
-        return new RequestOptions({ headers });
-    }
-
-    private handleError (error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
     }
 }

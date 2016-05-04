@@ -13,11 +13,13 @@ const pollInitialState = {
                 new Answer({
                     id: 1,
                     label: 'Remain a member of the European Union',
+                    shortLabel: 'Remain in the EU',
                     isSelected: false
                 }),
                 new Answer({
                     id: 2,
                     label: 'Leave the European Union',
+                    shortLabel: 'Leave the EU',
                     isSelected: false
                 })
             ]
