@@ -8,8 +8,16 @@ declare var d3: any;
     encapsulation: ViewEncapsulation.Native,
     template: `
         <style>
+
             .nvd3.nv-pie .nv-label text {
                 fill: white !important;
+                font-size: 12px;
+            }
+
+            @media only screen and (min-width: 668px) {
+                .nvd3.nv-pie .nv-label text {
+                    font-size: 18px;
+                }
             }
         </style>
         <div>
