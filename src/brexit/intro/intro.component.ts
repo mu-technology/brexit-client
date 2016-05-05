@@ -1,11 +1,13 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {Store} from '@ngrx/store';
 import {MdButton} from '@angular2-material/button';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {User, AUTH_START, AUTH_SUCCESS} from '../shared/user-reducer';
 import {TEXTS} from '../config';
 import {Auth} from '../authentication/auth';
-import {AUTH_START, AUTH_SUCCESS} from '../../shared/user-reducers';
+import {AppStore} from '../shared/store';
 
 @Component({
     selector: 'brexit-intro',
@@ -44,20 +46,20 @@ import {AUTH_START, AUTH_SUCCESS} from '../../shared/user-reducers';
             </md-card-actions>
         </md-card>
     `,
-    directives: [MD_CARD_DIRECTIVES, MdButton]
+    directives: [MdButton, MD_CARD_DIRECTIVES]
 })
 export class IntroComponent {
     intro: string = TEXTS.INTRO;
     private isAuthenticated: boolean;
 
-    constructor(private auth: Auth, private store: Store, private router: Router) {
-        const user = this.store.select('user');
-        user
+    constructor(private auth: Auth, private router: Router, private store: Store<AppStore>) {
+        const user$: Observable<User> = this.store.select('user');
+
+        user$
             .subscribe(u => {
                 this.isAuthenticated = u.isAuthenticated;
             });
     }
-
     authenticateUser() {
         if (this.isAuthenticated) {
             this.goToVote();

@@ -10,10 +10,6 @@ declare var d3: any;
         <style>
             .nvd3.nv-pie .nv-label text {
                 fill: white !important;
-                font-size: 12px;
-            }
-            .nvtooltip .xytooltip {
-                background: red !important;
             }
         </style>
         <div>
@@ -32,60 +28,10 @@ export class ResultsChartComponent implements OnInit {
             chart: {
                 type: 'pieChart',
                 height: 450,
-                margin : {
-                    top: 20,
-                    right: 20,
-                    bottom: 50,
-                    left: 55
-                },
                 x: (d) => d.label,
                 y: (d) => d.value,
-                showValues: true,
-                valueFormat: (d) => d3.format(',.4f')(d),
-                duration: 500,
-                xAxis: {
-                    axisLabel: 'X Axis'
-                },
-                yAxis: {
-                    axisLabel: 'Y Axis',
-                    axisLabelDistance: -10
-                }
+                valueFormat: (d) => d3.format('%')(d)
             }
         };
-
-        this.data = [
-            {
-                'label' : 'A' ,
-                'value' : 30
-            } ,
-            {
-                'label' : 'B' ,
-                'value' : 1
-            } ,
-            {
-                'label' : 'C' ,
-                'value' : 29
-            } ,
-            {
-                'label' : 'D' ,
-                'value' : 10
-            } ,
-            {
-                'label' : 'E' ,
-                'value' : 5
-            } ,
-            {
-                'label' : 'F' ,
-                'value' : 15
-            } ,
-            {
-                'label' : 'G' ,
-                'value' : 3
-            } ,
-            {
-                'label' : 'H' ,
-                'value' : 7
-            }
-        ];
     }
 }

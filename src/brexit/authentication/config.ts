@@ -53,24 +53,6 @@ export interface ICustomConfig {
 @Injectable()
 export class Config implements ICustomConfig {
 
-    constructor(config?: ICustomConfig) {
-        Object.keys(config).forEach((key) => {
-            if (key !== 'providers') {
-                this[key] = config[key];
-            } else {
-                Object.keys(config[key]).forEach((provider) => {
-                    if (typeof this.providers[provider] === 'undefined') {
-                        this.providers[provider] = config.providers[provider];
-                    } else {
-                        Object.keys(config.providers[provider]).forEach((prop) => {
-                            this.providers[provider][prop] = config.providers[provider][prop];
-                        });
-                    }
-                });
-            }
-        });
-    }
-
     tokenRoot: any = null;
     cordova: boolean = false;
     baseUrl: string = '/';
@@ -92,4 +74,22 @@ export class Config implements ICustomConfig {
             popupOptions: {width: 495, height: 645}
         }
     };
+
+    constructor(config?: ICustomConfig) {
+        Object.keys(config).forEach((key) => {
+            if (key !== 'providers') {
+                this[key] = config[key];
+            } else {
+                Object.keys(config[key]).forEach((provider) => {
+                    if (typeof this.providers[provider] === 'undefined') {
+                        this.providers[provider] = config.providers[provider];
+                    } else {
+                        Object.keys(config.providers[provider]).forEach((prop) => {
+                            this.providers[provider][prop] = config.providers[provider][prop];
+                        });
+                    }
+                });
+            }
+        });
+    }
 }

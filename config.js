@@ -42,14 +42,6 @@ System.config({
       "defaultExtension": "js",
       "main": "button.js"
     },
-    "@ngrx/store": {
-      "defaultExtension": "js",
-      "main": "index.js"
-    },
-    "ngrx-store-logger": {
-      "defaultExtension": "js",
-      "main": "dist/index.js"
-    },
     "angulartics2": {
       "defaultExtension": "js",
       "main": "index.js"
@@ -58,6 +50,10 @@ System.config({
       "defaultExtension": "js",
       "main": "build/lib/ng2-nvd3.js"
     },
+    "ngrx-store-logger": {
+      "defaultExtension": "js",
+      "main": "dist/index.js"
+    },
     "nvd3": {
       "defaultExtension": "js",
       "main": "build/nv.d3.js"
@@ -65,12 +61,16 @@ System.config({
     "d3": {
       "defaultExtension": "js",
       "main": "d3.js"
+    },
+    '@ngrx/store' : {
+      "main": 'index.js',
+      "defaultExtension": 'js'
     }
   },
 
   map: {
     "@angular2-material": "node_modules/@angular2-material",
-    "@ngrx": "node_modules/@ngrx",
+    "@ngrx/store": "node_modules/@ngrx/store",
     "angular2": "node_modules/angular2",
     "angulartics2": "node_modules/angulartics2",
     "d3": "node_modules/d3",

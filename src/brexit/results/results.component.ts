@@ -1,14 +1,14 @@
 import {Component} from 'angular2/core';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {Store} from '@ngrx/store';
-import {ResultsChartComponent} from './results-chart.component';
 import {ResultsService} from './results.service';
+import {AppStore} from '../shared/store';
+import {Answer} from '../poll/answer';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/concatMap';
-import 'rxjs/add/operator/filter';
+import {Polls} from '../shared/poll-reducer';
+import {Poll} from '../poll/poll';
 import 'rxjs/add/observable/zip';
-
-declare var d3: any;
+import {ResultsChartComponent} from './results-chart.component';
 
 @Component({
     selector: 'brexit-results',
@@ -35,14 +35,14 @@ declare var d3: any;
     providers: [ResultsService]
 })
 export class ResultsComponent {
-    private results: Array<any>;
+    results: Array<any>;
 
-    constructor(private resultsService: ResultsService, private store: Store) {
-        const brexitPollAnswers$: Observable<any> = this.store
+    constructor(private resultsService: ResultsService, private store: Store<AppStore>) {
+        const brexitPollAnswers$: Observable<Answer[]> = this.store
             .select('polls')
-            .concatMap(p => p.items)
-            .filter(p => p.id === 'BREXIT')
-            .map(p => p.answers);
+            .concatMap((p: Polls) => p.items)
+            .filter((p: Poll) => p.id === 'BREXIT')
+            .map((p: Poll) => p.answers);
 
         const results$: Observable<any> = this.resultsService.getResults();
 

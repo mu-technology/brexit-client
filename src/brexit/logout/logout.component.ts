@@ -3,7 +3,8 @@ import {Router} from 'angular2/router';
 import {MdButton} from '@angular2-material/button';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import {LOGOUT} from '../../shared/user-reducers';
+import {LOGOUT, User} from '../shared/user-reducer';
+import {AppStore} from '../shared/store';
 
 @Component({
     selector: 'logout',
@@ -19,12 +20,12 @@ import {LOGOUT} from '../../shared/user-reducers';
     directives: [MdButton]
 })
 export class LogoutComponent {
-    private isUserAuthenticated: boolean;
+    isUserAuthenticated: boolean = true;
 
-    constructor(private router: Router, private store: Store) {
-        const user: Observable = this.store.select('user');
+    constructor(private router: Router, private store: Store<AppStore>) {
+        const user$: Observable<User> = this.store.select('user');
 
-        user
+        user$
             .subscribe((u) => {
                 this.isUserAuthenticated = u.isAuthenticated;
             });

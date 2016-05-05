@@ -1,13 +1,15 @@
 import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
 import {AnswerListComponent} from './answer-list/answer-list.component';
-import {ResultsButtonComponent} from '../results/results-button.component';
-import {SUCCESSFUL_ANSWER} from '../../shared/poll-reducer';
 import {Answer} from './answer';
 import {PollService} from './poll.service';
+import {Router} from 'angular2/router';
+import {Polls, SUCCESSFUL_ANSWER} from '../shared/poll-reducer';
+import {User} from '../shared/user-reducer';
+import {Observable} from 'rxjs/Observable';
+import {AppStore} from '../shared/store';
+import {ResultsButtonComponent} from '../results/results-button.component';
 
 @Component({
     selector: 'brexit-poll',
@@ -42,28 +44,28 @@ import {PollService} from './poll.service';
     providers: [PollService]
 })
 export class PollComponent {
-    private answers: Answer[];
-    private question: string;
+    answers: Answer[];
+    question: string;
 
-    constructor(private router: Router, private store: Store, private pollService: PollService) {
-        const polls: Observable = this.store.select('polls');
-        const user: Observable = this.store.select('user');
+    constructor(private pollService: PollService, private router: Router, private store: Store<AppStore>) {
+        const polls$: Observable<Polls> = this.store.select('polls');
+        const user$: Observable<User> = this.store.select('user');
 
-        polls.subscribe(poll => {
+        polls$.subscribe(poll => {
             const brexitPoll = poll.items.find(p => p.id === 'BREXIT');
 
             this.question = brexitPoll.question;
             this.answers = brexitPoll.answers;
         });
 
-        user.subscribe(u => {
+        user$.subscribe(u => {
             if (!u.isAuthenticated) {
                 this.goToIntro();
             }
         });
 
         this.pollService.getUserAnswer()
-            .subscribe(a =>
+            .subscribe((a: Answer) =>
                 this.store
                     .dispatch(SUCCESSFUL_ANSWER({
                         questionId: 'BREXIT',
@@ -71,10 +73,10 @@ export class PollComponent {
                     })));
     }
 
-    selectAnswer(answer) {
+    selectAnswer(answer: Answer) {
         this.pollService
             .postAnswer(answer)
-            .subscribe(a => {
+            .subscribe((a: Answer) => {
                 this.store.dispatch(SUCCESSFUL_ANSWER({
                     questionId: 'BREXIT',
                     answerId: a.id

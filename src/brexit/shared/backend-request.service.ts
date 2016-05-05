@@ -1,4 +1,4 @@
-import {LOCALSTORAGE} from '../brexit/config';
+import {LOCALSTORAGE} from '../config';
 import {Headers, RequestOptions, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 

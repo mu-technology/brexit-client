@@ -30,7 +30,7 @@ import {Answer} from '../answer';
 })
 export class AnswerListComponent {
     answers: Answer[];
-    onAnswerChange: EventEmitter = new EventEmitter();
+    onAnswerChange: EventEmitter<Answer> = new EventEmitter();
 
     selectAnswer(answer: Answer) {
         this.onAnswerChange.emit(answer);

@@ -8,9 +8,11 @@ workflow
     .task('develop', 'Develop the application', [
         'clean',
         'lint',
+        'compile:js',
         'build:css',
         'build:assets',
-        'build:index:dev'
+        'build:index:dev',
+        'watch'
     ])
     .task('release', 'Release the application', [
         'clean',

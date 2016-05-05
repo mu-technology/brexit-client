@@ -1,10 +1,14 @@
-import {Answer} from '../brexit/poll/answer';
-import {Poll} from '../brexit/poll/poll';
+import {Answer} from '../poll/answer';
+import {Poll} from '../poll/poll';
 import {Reducer, Action} from '@ngrx/store';
 
 export const SUCCESSFUL_ANSWER = (payload = { questionId: '', answerId: 0 }) => ({ type: 'SUCCESSFUL_ANSWER', payload});
 
-const pollInitialState = {
+export interface Polls {
+    items: Poll[];
+}
+
+const pollInitialState: Polls = {
     items: [
         new Poll({
             id: 'BREXIT',
@@ -27,7 +31,7 @@ const pollInitialState = {
     ]
 };
 
-export const polls: Reducer = (state = pollInitialState, action: Action) => {
+export const polls: Reducer<Polls> = (state = pollInitialState, action: Action) => {
     switch (action.type) {
         case 'SELECT_ANSWER':
             return state;

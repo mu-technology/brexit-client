@@ -6,8 +6,8 @@ import {Angulartics2} from 'angulartics2/index';
 import {provideStore} from '@ngrx/store';
 import {loggerMiddleware} from 'ngrx-store-logger';
 import {AppComponent} from './brexit/app.component';
-import {user} from './shared/user-reducers';
-import {polls} from './shared/poll-reducer';
+import {user} from './brexit/shared/user-reducer';
+import {polls} from './brexit/shared/poll-reducer';
 import {WEB_API} from './brexit/config';
 
 bootstrap(AppComponent, [

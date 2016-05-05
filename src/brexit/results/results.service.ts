@@ -1,7 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {BackendRequestService} from '../../shared/backend-request.service';
+import {BackendRequestService} from '../shared/backend-request.service';
 import {WEB_API} from '../config';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ResultsService extends BackendRequestService {
@@ -10,7 +11,7 @@ export class ResultsService extends BackendRequestService {
         super();
     }
 
-    getResults() {
+    getResults(): Observable<any> {
         const URL = `${WEB_API.DOMAIN}${WEB_API.ENDPOINTS.RESULTS}`;
         const requestOptions = this.getRequestOptions();
 
