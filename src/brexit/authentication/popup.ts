@@ -1,10 +1,10 @@
 import {Injectable} from 'angular2/core';
-import {Observable} from 'rxjs/Observable';
 import {Config, IPopupOptions} from './config';
-
-/**
- * Created by Ron on 17/12/2015.
- */
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/takeWhile';
 
 @Injectable()
 export class Popup {

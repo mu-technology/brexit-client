@@ -45,15 +45,38 @@ System.config({
     "angulartics2": {
       "defaultExtension": "js",
       "main": "index.js"
+    },
+    "ng2-nvd3": {
+      "defaultExtension": "js",
+      "main": "build/lib/ng2-nvd3.js"
+    },
+    "ngrx-store-logger": {
+      "defaultExtension": "js",
+      "main": "dist/index.js"
+    },
+    "nvd3": {
+      "defaultExtension": "js",
+      "main": "build/nv.d3.js"
+    },
+    "d3": {
+      "defaultExtension": "js",
+      "main": "d3.js"
+    },
+    '@ngrx/store' : {
+      "main": 'index.js',
+      "defaultExtension": 'js'
     }
   },
 
   map: {
     "@angular2-material": "node_modules/@angular2-material",
+    "@ngrx/store": "node_modules/@ngrx/store",
     "angular2": "node_modules/angular2",
     "angulartics2": "node_modules/angulartics2",
-    "redux": "node_modules/redux/dist/redux.js",
-    "redux-logger": "node_modules/redux-logger/dist/index.js",
+    "d3": "node_modules/d3",
+    "ng2-nvd3": "node_modules/ng2-nvd3",
+    "ngrx-store-logger": "node_modules/ngrx-store-logger",
+    "nvd3": "node_modules/nvd3",
     "rxjs": "node_modules/rxjs",
     "ts": "github:frankwallis/plugin-typescript@4.0.2",
     "typescript": "npm:typescript@1.8.9",

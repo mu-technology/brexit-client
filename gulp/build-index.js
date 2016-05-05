@@ -3,7 +3,7 @@ module.exports = (workflow, gulp, $, config) => {
     workflow.subtask('build:index:dev', () => {
         const vendors = config.vendors.map(v => v.path);
         const target = gulp.src('src/index.html');
-        const cssSources = gulp.src(['dist/app.css']);
+        const cssSources = gulp.src(['assets/*.css']);
         const vendorSources = gulp.src(vendors);
 
         return target
@@ -19,7 +19,7 @@ module.exports = (workflow, gulp, $, config) => {
     workflow.subtask('build:index:release', ['build:vendors'], () => {
         const target = gulp.src('src/index.html');
         const appSources = gulp.src(['dist/main.bundle.js']);
-        const cssSources = gulp.src(['dist/app.css']);
+        const cssSources = gulp.src(['assets/*.css']);
         const vendorSources = gulp.src(['dist/vendors/*.js']);
 
         return target

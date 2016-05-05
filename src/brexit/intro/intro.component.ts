@@ -1,12 +1,13 @@
-import {Component, Inject} from 'angular2/core';
-import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
-import {MdButton} from '@angular2-material/button';
+import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {AuthenticationService} from '../authentication/authentication.service';
-import {authSuccess} from '../shared/brexit.actions';
+import {MdButton} from '@angular2-material/button';
+import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {User, AUTH_START, AUTH_SUCCESS} from '../shared/user-reducer';
 import {TEXTS} from '../config';
-
-declare var __moduleName: string;
+import {Auth} from '../authentication/auth';
+import {AppStore} from '../shared/store';
 
 @Component({
     selector: 'brexit-intro',
@@ -41,40 +42,41 @@ declare var __moduleName: string;
         <md-card class="intro-card">
             <p class="intro-card-text">{{ intro }}</p>
             <md-card-actions class="intro-card-actions">
-                <button md-raised-button (click)="onClick()">Share your opinion</button>
+                <button md-raised-button (click)="authenticateUser()">Share your opinion</button>
             </md-card-actions>
         </md-card>
     `,
-    directives: [MD_CARD_DIRECTIVES, MdButton],
-    providers: [AuthenticationService]
+    directives: [MdButton, MD_CARD_DIRECTIVES]
 })
 export class IntroComponent {
+    intro: string = TEXTS.INTRO;
+    private isAuthenticated: boolean;
 
-    intro: string;
+    constructor(private auth: Auth, private router: Router, private store: Store<AppStore>) {
+        const user$: Observable<User> = this.store.select('user');
 
-    constructor(private _router: Router, private authenticationService: AuthenticationService,
-                @Inject('BrexitStore') private store: any) {
-        const initialState = this.store.getState();
-        const isUserAuthenticated = initialState.user.isAuthenticated;
-        this.intro = TEXTS.intro;
-
-        if (isUserAuthenticated) {
+        user$
+            .subscribe(u => {
+                this.isAuthenticated = u.isAuthenticated;
+            });
+    }
+    authenticateUser() {
+        if (this.isAuthenticated) {
             this.goToVote();
+        } else {
+            this.store.dispatch(AUTH_START());
+
+            this.auth.authenticate('twitter')
+                .map(res => res.json())
+                .subscribe((user) => {
+                    this.store.dispatch(AUTH_SUCCESS(user.data));
+
+                    this.goToVote();
+                });
         }
     }
 
-    onClick() {
-        this.authenticationService.authenticate()
-            .subscribe(
-                (user) => {
-                    this.store.dispatch(authSuccess(user.data));
-                    this.goToVote();
-                },
-                (authErr) => { console.log('err ->', authErr); }
-            );
-    }
-
     private goToVote() {
-        this._router.navigate(['Vote']);
+        this.router.navigate(['Vote']);
     }
 }

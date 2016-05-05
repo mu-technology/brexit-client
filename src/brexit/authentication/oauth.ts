@@ -12,10 +12,8 @@ export class Oauth {
         private config: Config) {}
 
     authenticate(name: string, userData?: any): Observable<Response> {
-        // var injector = Injector.resolveAndCreate([Oauth1, Oauth2]);
         const provider: Oauth1 = this.injector.get(Oauth1);
-        console.log('provider ->', provider);
-        console.log('this.config.providers[name] ->', this.config.providers[name]);
+
         return provider.open(this.config.providers[name], userData || {})
             .map((response: Response) => {
                 // this is for a scenario when someone wishes to opt out from

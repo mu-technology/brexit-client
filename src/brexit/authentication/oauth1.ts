@@ -3,6 +3,7 @@ import {Popup} from './popup';
 import {Http, Response} from 'angular2/http';
 import {joinUrl} from './utils';
 import {Config, IOauth1Options} from './config';
+import 'rxjs/add/operator/concatMap';
 
 @Injectable()
 export class Oauth1 {
@@ -32,7 +33,7 @@ export class Oauth1 {
         }
 
         return this.http.post(serverUrl, JSON.stringify(this.defaults))
-            .flatMap((response: Response) => {
+            .concatMap((response: Response) => {
                 if (this.config.cordova) {
                     popupWindow = this.popup.open(
                         [this.defaults.authorizationEndpoint, this.buildQueryString(response.json())].join('?'),
@@ -45,7 +46,7 @@ export class Oauth1 {
 
                 return this.config.cordova ? popupWindow.eventListener(this.defaults.redirectUri) : popupWindow.pollPopup();
             })
-            .flatMap((response) => {
+            .concatMap((response) => {
                 return this.exchangeForToken(response, userData);
             });
     }
