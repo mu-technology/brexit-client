@@ -62,9 +62,9 @@ System.config({
       "defaultExtension": "js",
       "main": "d3.js"
     },
-    '@ngrx/store' : {
-      "main": 'index.js',
-      "defaultExtension": 'js'
+    "@ngrx/store": {
+      "main": "index.js",
+      "defaultExtension": "js"
     }
   },
 
