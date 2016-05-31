@@ -60,6 +60,7 @@ export class IntroComponent {
                 this.isAuthenticated = u.isAuthenticated;
             });
     }
+
     authenticateUser() {
         if (this.isAuthenticated) {
             this.goToVote();
@@ -69,9 +70,11 @@ export class IntroComponent {
             this.auth.authenticate('twitter')
                 .map(res => res.json())
                 .subscribe((user) => {
-                    this.store.dispatch(AUTH_SUCCESS(user.data));
+                    if (user.data) {
+                        this.store.dispatch(AUTH_SUCCESS(user.data));
 
-                    this.goToVote();
+                        this.goToVote();
+                    }
                 });
         }
     }
