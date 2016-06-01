@@ -9,6 +9,7 @@ import {Polls} from '../shared/poll-reducer';
 import {Poll} from '../poll/poll';
 import 'rxjs/add/observable/zip';
 import {ResultsChartComponent} from './results-chart.component';
+import {ResultsTotalsComponent} from './results-totals.component';
 
 @Component({
     selector: 'brexit-results',
@@ -28,14 +29,18 @@ import {ResultsChartComponent} from './results-chart.component';
         </style>
         <md-card class="results-card">
             <md-card-title class="results-card-title">Results</md-card-title>
-            <results-chart [data]="results"></results-chart> 
+            <md-card-content>
+                <results-chart [data]="results"></results-chart>
+                <results-totals [count]="count"></results-totals>
+            </md-card-content>
         </md-card>
     `,
-    directives: [MD_CARD_DIRECTIVES, ResultsChartComponent],
+    directives: [MD_CARD_DIRECTIVES, ResultsChartComponent, ResultsTotalsComponent],
     providers: [ResultsService]
 })
 export class ResultsComponent {
     results: Array<any>;
+    count: Number;
 
     constructor(private resultsService: ResultsService, private store: Store<AppStore>) {
         const brexitPollAnswers$: Observable<Answer[]> = this.store
@@ -61,6 +66,8 @@ export class ResultsComponent {
                         label: answers.find(a => a.id === v.id).shortLabel,
                         value: v.count / results.total
                     }));
+
+                this.count = results.total;
             });
     }
 }
